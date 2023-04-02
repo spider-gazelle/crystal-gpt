@@ -1,6 +1,6 @@
 name: chatgpt-plugin
 version: 1.0.0
-description: a todo application
+description: Plugin for managing a TODO list, you can add, remove and view your TODOs.
 
 dependencies:
   # The server framework
