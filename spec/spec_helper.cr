@@ -1,4 +1,6 @@
 require "spec"
+require "json"
+require "yaml"
 
 # Helper methods for testing controllers (curl, with_server, context)
 require "action-controller/spec_helper"

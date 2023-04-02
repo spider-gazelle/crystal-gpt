@@ -7,6 +7,7 @@ class Metadata < Application
   # The manifest file that defines the plugin
   # it's using the macro DSL so it is not included
   # in the OpenAPI docs that are provided to ChatGPT
+  # https://platform.openai.com/docs/plugins/getting-started/plugin-manifest
   get "/ai-plugin.json", :ai_plugin_json do
     host = "#{request_protocol}://#{request.headers["Host"]?}"
     description = App::DESCRIPTION || raise "please provide a description in your shard.yml"
@@ -39,6 +40,7 @@ class Metadata < Application
   ).to_yaml
 
   # returns the OpenAPI representation of this service
+  # https://platform.openai.com/docs/plugins/getting-started/openapi-definition
   get "/openapi.yaml", :openapi_yaml do
     render yaml: OPENAPI
   end
