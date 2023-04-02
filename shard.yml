@@ -1,5 +1,6 @@
 name: chatgpt-plugin
 version: 1.0.0
+description: a todo application
 
 dependencies:
   # The server framework

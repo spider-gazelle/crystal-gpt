@@ -7,13 +7,15 @@ module App
 
     getter name : String
     getter version : String
+    getter description : String?
   end
 
   {% begin %}
-    SHARD = Shard.from_yaml({{read_file("./shard.yml").split("\n").select { |row| row.starts_with?("version:") || row.starts_with?("name:") }.join("\n") }})
+    SHARD = Shard.from_yaml({{read_file("./shard.yml").split("\n").select { |row| row.starts_with?("version:") || row.starts_with?("name:") || row.starts_with?("description:") }.join("\n")}})
   {% end %}
-  NAME = SHARD.name
-  VERSION = SHARD.version
+  NAME        = SHARD.name
+  VERSION     = SHARD.version
+  DESCRIPTION = SHARD.description
 
   Log         = ::Log.for(NAME)
   LOG_BACKEND = ActionController.default_backend

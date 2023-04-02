@@ -1,14 +1,15 @@
 require "uuid"
-require "yaml"
 
 abstract class Application < ActionController::Base
   # Configure your log source name
   # NOTE:: this is chaining from App::Log
   Log = ::App::Log.for("controller")
 
-  # framework uses "application/json" by default
-  add_responder("application/yaml") { |io, result| result.to_yaml(io) }
-  add_responder("text/html") { |io, result| result.to_json(io) }
+  # Add CORS header to all requests so GPT chat can access the plugin
+  @[AC::Route::Filter(:before_action)]
+  def set_cors_headers
+    response.headers["Access-Control-Allow-Origin"] = "https://chat.openai.com"
+  end
 
   # This makes it simple to match client requests with server side logs.
   # When building microservices this ID should be propagated to upstream services.
@@ -25,11 +26,6 @@ abstract class Application < ActionController::Base
     # request_id = request.headers["X-Request-ID"]? || UUID.random.to_s
     # Log.context.set client_ip: client_ip, request_id: request_id
     # response.headers["X-Request-ID"] = request_id
-  end
-
-  @[AC::Route::Filter(:before_action)]
-  def set_date_header
-    response.headers["Date"] = HTTP.format_time(Time.utc)
   end
 
   # Provides details on available data formats
