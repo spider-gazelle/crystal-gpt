@@ -7,8 +7,17 @@ The easiest way to build ChatGPT plugins.
 3. Update `shard.yml` with your plugin name and description
 4. Everything else is automatically generated
 
-OpenAI allows you test plugins locally
-https://platform.openai.com/docs/plugins/getting-started/running-a-plugin
+OpenAI allows you [test plugins locally](https://platform.openai.com/docs/plugins/getting-started/running-a-plugin)
+
+## Why use this template?
+
+You can [extend ChatGPTs abilities](https://openai.com/blog/chatgpt-plugins#third-party-plugins) via a web service - but you have to write extremely detailed documentation on how it works with comments describing what each function does
+
+In this template there is a file under src/controllers called [plugin_routes.cr](https://github.com/spider-gazelle/crystal-gpt/blob/main/src/controllers/plugin_routes.cr) that implements the functions ChatGPT can use, in this case implementing a very basic todo application.
+
+[Spider-Gazelle](https://spider-gazelle.net/), the web framework this template is built on, introspects itself and then outputs all the metadata ChatGPT needs to be able to use those functions.
+
+Feel free to re-name `plugin_routes` to something more descriptive and you can add as many additional controllers as you require. Just remember to add comments to each route / function so ChatGPT can understand what they are used for.
 
 ## Testing
 
