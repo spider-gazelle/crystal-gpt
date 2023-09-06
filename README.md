@@ -28,3 +28,9 @@ Feel free to re-name `plugin_routes` to something more descriptive and you can a
 ## Compiling
 
 `crystal build ./src/app.cr`
+
+## Testing plugins
+
+* Obtain a ChatGPT API key from either [OpenAI](https://platform.openai.com/account/api-keys) or [Azure](https://portal.azure.com/) (Azure AI services | Azure OpenAI)
+* Install [Chat Copilot](https://learn.microsoft.com/en-us/semantic-kernel/chat-copilot/getting-started) for local development
+  * Configure [plugins for testing](https://learn.microsoft.com/en-us/semantic-kernel/chat-copilot/testing-plugins-with-chat-copilot)
