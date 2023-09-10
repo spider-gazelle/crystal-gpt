@@ -1,4 +1,5 @@
 require "uuid"
+require "uri"
 
 abstract class Application < ActionController::Base
   # Configure your log source name
@@ -8,7 +9,7 @@ abstract class Application < ActionController::Base
   # Add CORS header to all requests so GPT chat can access the plugin
   @[AC::Route::Filter(:before_action)]
   def set_cors_headers
-    response.headers["Access-Control-Allow-Origin"] = "https://chat.openai.com"
+    response.headers["Access-Control-Allow-Origin"] = "*"
   end
 
   # This makes it simple to match client requests with server side logs.

@@ -29,8 +29,7 @@ class PluginRoutes < Application
     todo
   end
 
-  # return the todo at the index provided
-  # indexes start at 0
+  # return the todo at the index provided, indexes start at 0
   @[AC::Route::GET("/:index")]
   def show(index : Int32) : Todo
     todo = TODOS[index]?
@@ -39,6 +38,7 @@ class PluginRoutes < Application
   end
 
   # modify the todo at the index provided
+  #
   # indexes start at 0 and this will also set completed to false
   @[AC::Route::PUT("/:index", body: :todo)]
   def update(index : Int32, todo : Todo) : Todo
@@ -48,6 +48,7 @@ class PluginRoutes < Application
   end
 
   # mark the todo, at the index provided, as completed
+  #
   # indexes start at 0
   @[AC::Route::DELETE("/:index", status_code: HTTP::Status::ACCEPTED)]
   def complete(index : Int32) : Nil

@@ -31,6 +31,10 @@ Feel free to re-name `plugin_routes` to something more descriptive and you can a
 
 ## Testing plugins
 
+Firstly, you'll need to enable this [Permissions-Policy feature](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy/document-domain) in [your browser](https://caniuse.com/mdn-http_headers_permissions-policy_document-domain)
+
 * Obtain a ChatGPT API key from either [OpenAI](https://platform.openai.com/account/api-keys) or [Azure](https://portal.azure.com/) (Azure AI services | Azure OpenAI)
 * Install [Chat Copilot](https://learn.microsoft.com/en-us/semantic-kernel/chat-copilot/getting-started) for local development
   * Configure [plugins for testing](https://learn.microsoft.com/en-us/semantic-kernel/chat-copilot/testing-plugins-with-chat-copilot)
+
+Alternatively you can use Plugin feature on [OpenAI ChatGPT web UI](https://chat.openai.com/?model=gpt-4-plugins)

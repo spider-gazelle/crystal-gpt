@@ -2,7 +2,8 @@
 class Metadata < Application
   base "/.well-known"
 
-  NAME = App::NAME.gsub(/\-|\_/, ' ')
+  HUMAN_NAME = App::NAME.gsub(/\-|\_/, ' ')
+  MODEL_NAME = App::NAME.gsub(/\-/, '_')
 
   # The manifest file that defines the plugin
   # it's using the macro DSL so it is not included
@@ -14,8 +15,8 @@ class Metadata < Application
 
     render(json: {
       "schema_version":        "v1",
-      "name_for_human":        NAME,
-      "name_for_model":        NAME,
+      "name_for_human":        HUMAN_NAME,
+      "name_for_model":        MODEL_NAME,
       "description_for_human": description,
       "description_for_model": description,
       "auth":                  {
@@ -33,15 +34,21 @@ class Metadata < Application
   end
 
   # this file is built as part of the docker build
-  OPENAPI = File.exists?("openapi.yml") ? File.read("openapi.yml") : ActionController::OpenAPI.generate_open_api_docs(
-    title: NAME,
+  OPENAPI = File.exists?("openapi.yml") ? YAML.parse(File.read "openapi.yml") : ActionController::OpenAPI.generate_open_api_docs(
+    title: HUMAN_NAME,
     version: App::VERSION,
     description: App::DESCRIPTION || "OpenAPI docs for ChatGPT plugin"
-  ).to_yaml
+  )
 
-  # returns the OpenAPI representation of this service
+  # returns the OpenAPI representation of this service in JSON format
+  # https://platform.openai.com/docs/plugins/getting-started/openapi-definition
+  get "/openapi.json", :openapi_json do
+    render json: OPENAPI.to_json
+  end
+
+  # returns the OpenAPI representation of this service in YAML format
   # https://platform.openai.com/docs/plugins/getting-started/openapi-definition
   get "/openapi.yaml", :openapi_yaml do
-    render yaml: OPENAPI
+    render yaml: OPENAPI.to_yaml
   end
 end
