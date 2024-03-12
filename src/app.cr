@@ -11,11 +11,11 @@ exit_code = nil
 OptionParser.parse(ARGV.dup) do |parser|
   parser.banner = "Usage: #{PROGRAM_NAME} [arguments]"
 
-  parser.on("-b HOST", "--bind=HOST", "Specifies the server host") { |h| host = h }
-  parser.on("-p PORT", "--port=PORT", "Specifies the server port") { |p| port = p.to_i }
+  parser.on("-b HOST", "--bind=HOST", "Specifies the server host") { |bind_host| host = bind_host }
+  parser.on("-p PORT", "--port=PORT", "Specifies the server port") { |bind_port| port = bind_port.to_i }
 
-  parser.on("-w COUNT", "--workers=COUNT", "Specifies the number of processes to handle requests") do |w|
-    process_count = w.to_i
+  parser.on("-w COUNT", "--workers=COUNT", "Specifies the number of processes to handle requests") do |workers|
+    process_count = workers.to_i
   end
 
   parser.on("-r", "--routes", "List the application routes") do
